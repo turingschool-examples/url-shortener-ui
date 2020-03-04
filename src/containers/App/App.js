@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { setOrders } from '../../actions';
-import { getOrders } from '../../apiCalls';
-import Orders from '../../components/Orders/Orders';
-import OrderForm from '../../components/OrderForm/OrderForm';
+import { setUrls } from '../../actions';
+import { getUrls } from '../../apiCalls';
+import UrlContainer from '../../components/UrlContainer/UrlContainer';
+import UrlForm from '../../components/UrlForm/UrlForm';
 
 export class App extends Component {
   constructor(props) {
@@ -14,8 +13,8 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    getOrders()
-      .then(data => this.props.setOrders(data.orders))
+    getUrls()
+      .then(data => this.props.setUrls(data.urls))
       .catch(err => console.error('Error fetching:', err));
   }
 
@@ -23,25 +22,24 @@ export class App extends Component {
     return (
       <main className="App">
         <header>
-          <h1>Burrito Builder</h1>
-          <OrderForm />
+          <h1>URL Shortener</h1>
+          <UrlForm />
         </header>
-        
-        <Orders orders={this.props.orders}/>
+
+        <UrlContainer urls={this.props.urls}/>
       </main>
     );
   }
 }
 
-export const mapStateToProps = ({ orders }) => ({
-  orders
+export const mapStateToProps = ({ urls }) => ({
+  urls
 });
 
-export const mapDispatchToProps = dispatch => (
-  bindActionCreators({
-    setOrders,
-  }, dispatch)
-);
+export const mapDispatchToProps = dispatch => {
+  return {
+    setUrls: urls => dispatch(setUrls(urls))
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-

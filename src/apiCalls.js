@@ -1,4 +1,4 @@
-export const getOrders = () => {
-  return fetch('http://localhost:3001/api/v1/orders')
+export const getUrls = () => {
+  return fetch('http://localhost:3001/api/v1/urls')
       .then(response => response.json())
 }

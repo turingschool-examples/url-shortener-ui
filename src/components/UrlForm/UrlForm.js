@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-class OrderForm extends Component {
+class UrlForm extends Component {
   constructor(props) {
     super();
     this.props = props;
     this.state = {
-      name: '',
-      ingredients: []
+      title: '',
+      urlToShorten: ''
     };
   }
 
@@ -29,28 +29,23 @@ class OrderForm extends Component {
   }
 
   render() {
-    const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
-    const ingredientButtons = possibleIngredients.map(ingredient => {
-      return (
-        <button key={ingredient} name={ingredient} onClick={e => this.handleIngredientChange(e)}>
-          {ingredient}
-        </button>
-      )
-    });
-
     return (
       <form>
         <input
           type='text'
-          placeholder='Name'
-          name='name'
-          value={this.state.name}
+          placeholder='Title...'
+          name='title'
+          value={this.state.title}
           onChange={e => this.handleNameChange(e)}
         />
 
-        { ingredientButtons }
-
-        <p>Order: { this.state.ingredients.join(', ') || 'Nothing selected' }</p>
+        <input
+          type='text'
+          placeholder='URL to Shorten...'
+          name='title'
+          value={this.state.title}
+          onChange={e => this.handleNameChange(e)}
+        />
 
         <button onClick={e => this.handleSubmit(e)}>
           Submit Order
@@ -60,4 +55,4 @@ class OrderForm extends Component {
   }
 }
 
-export default OrderForm;
+export default UrlForm;
