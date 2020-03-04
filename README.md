@@ -1,6 +1,20 @@
-# Burrito Builder UI
+# URL Shortener UI
 
-Our company is building a prototype ticketing system for a local burrito shop. It's not perfect, but it will get us toward an MVP that we can show to all the top burrito VCs in town.
+Our company is building a knock off of the site [bitly](https://bitly.com/) to shorten long links. The site will take in a long link and give the user a shortened link that they can put in their browser and be taken to the original long link.
+
+For example, this app will be able to:
+* Take in a long link like `https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80`
+* Submit the long link to a server
+* The server will give back a short link like `http://localhost:3001/useshorturl/1`
+* The short link will send the user to the same link as the long link! (some server magic that you don't need to worry about)
+
+*Note: the example above will not readily work in the browser*
+
+Wow, that saves a lot of space by making the URL shorter!
+
+The server is already setup and ready to go from the back-end team. [The back-end server is located here](https://github.com/turingschool-examples/url-shortener-api).
+
+We need to build a front-end for users to interact with.
 
 ## Setup
 
@@ -9,7 +23,7 @@ Our company is building a prototype ticketing system for a local burrito shop. I
 * Run `npm install` to install dependencies
 * Run `npm start` to start your development server
 
-Be sure to setup the backend repo for Burrito Builder to be able to retrieve and save burrito orders.
+Be sure to setup the back-end repo for URL Shortener to be able to retrieve and save burrito shortened URLs.
 
 ## Iterations
 
