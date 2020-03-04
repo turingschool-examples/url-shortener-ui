@@ -14,18 +14,13 @@ class UrlForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleIngredientChange = e => {
-    e.preventDefault();
-    this.setState({ingredients: [...this.state.ingredients, e.target.name]});
-  }
-
   handleSubmit = e => {
     e.preventDefault();
     this.clearInputs();
   }
 
   clearInputs = () => {
-    this.setState({name: '', ingredients: []});
+    this.setState({title: '', urlToShorten: ''});
   }
 
   render() {
@@ -48,7 +43,7 @@ class UrlForm extends Component {
         />
 
         <button onClick={e => this.handleSubmit(e)}>
-          Submit Order
+          Shorten Please!
         </button>
       </form>
     )
