@@ -13,6 +13,13 @@ export class App extends Component {
   }
 
   componentDidMount() {
+    getUrls()
+      .then((response) => {
+        this.setState({
+          urls: response.urls
+        })
+      })
+      .catch(error => console.log('fetch', error))
   }
 
   render() {
