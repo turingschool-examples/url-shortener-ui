@@ -55,7 +55,10 @@ describe('App',  () => {
     let button = screen.getByRole("button", {name: /shorten please/i})
     let titleInput = screen.getByPlaceholderText("URL to Shorten...")
     let urlInput = screen.getByPlaceholderText("Title...")
-    userEvent
+    userEvent.type(titleInput, "name")
+    userEvent.type(urlInput, "https://gist.github.com/khalidwilliams/88218c0b4eda47527465ff1e942fb331")
+    userEvent.click(button)
+    // expect(method in container to have been called)
   })
   
 })
