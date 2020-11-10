@@ -41,6 +41,7 @@ export class App extends Component {
           <UrlForm 
             addUrl={this.addUrl}
           />
+          {this.state.message.length ? <p>{this.state.message}</p> : null }
         </header>
 
         <UrlContainer urls={this.state.urls}/>
