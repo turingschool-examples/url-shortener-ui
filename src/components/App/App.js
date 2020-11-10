@@ -13,8 +13,7 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3001/api/v1/urls')
-      .then(res => res.json())
+    getUrls()
       .then(data => this.setState({ urls: data.urls }))
   }
 
@@ -23,7 +22,8 @@ export class App extends Component {
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
-          <UrlForm />
+          <UrlForm
+          urls={this.state.urls}/>
         </header>
 
         <UrlContainer urls={this.state.urls}/>
