@@ -15,15 +15,16 @@ describe('Url Container', () => {
         title: "hey it's a url"
       }
     ]
-    
+
     render(
       <UrlContainer 
         urls={mockUrls}
       />
     )
-
+      screen.debug()
     expect(screen.getByText(mockUrls[0].title)).toBeInTheDocument()
     expect(screen.getByText(mockUrls[0].long_url)).toBeInTheDocument()
     expect(screen.getByText(mockUrls[0].short_url)).toBeInTheDocument()
+    expect(screen.getByText(mockUrls[0].short_url).href).toEqual('http://localhost/short.co')
   })
 })
