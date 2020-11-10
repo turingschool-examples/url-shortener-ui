@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getUrls } from '../../apiCalls';
+import { getUrls, postUrl } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
@@ -18,6 +18,16 @@ export class App extends Component {
       const urls = await getUrls()
       console.log(urls)
       this.setState(urls)
+    } catch (error) {
+      this.setState({message: error.message})
+    }
+  }
+
+  addUrl = async urlToAdd => {
+    try {
+      const postedUrl = await postUrl(urlToAdd)
+      const message = "URL successfully added!"
+      this.setState({ urls: [...this.state.urls, postedUrl], message})
     } catch (error) {
       this.setState({message: error.message})
     }
