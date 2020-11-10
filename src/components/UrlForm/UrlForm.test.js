@@ -29,4 +29,18 @@ describe('Url Form', () => {
     userEvent.type(screen.getByPlaceholderText('URL to Shorten...'),'squeezy cheese')
     expect(screen.getByDisplayValue('squeezy cheese')).toBeInTheDocument()
   })
+
+  it('Should call a function when submit button is hit', () => {
+    const mockAddUrl = jest.fn()
+    render(
+      <UrlForm 
+        addUrl={mockAddUrl}
+      />
+    )
+    
+    userEvent.type(screen.getByPlaceholderText('Title...'),'bees knees')
+    userEvent.type(screen.getByPlaceholderText('URL to Shorten...'),'squeezy cheese')
+    userEvent.click(screen.getByText('Shorten Please!'))
+    expect(mockAddUrl).toHaveBeenCalledTimes(1)
+  })
 })
