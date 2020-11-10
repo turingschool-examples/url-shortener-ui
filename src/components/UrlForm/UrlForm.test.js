@@ -5,8 +5,6 @@ import userEvent from "@testing-library/user-event";
 import UrlForm from './UrlForm'
 
 describe('Url Form', () => {
-  beforeEach(() => {
-  })
   it('Should render a URL form', () => {
     render(
       <UrlForm 
