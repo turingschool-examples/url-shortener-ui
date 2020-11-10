@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getUrls } from '../../apiCalls';
+import { getUrls} from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
+import {postUrls} from '../../apiCalls'
 
 export class App extends Component {
   constructor(props) {
@@ -13,6 +14,15 @@ export class App extends Component {
   }
 
   componentDidMount() {
+    getUrls()
+    .then(data => this.setState({urls: data.urls}))
+  }
+
+  postData = async (title, urlToShorten) => {
+    await postUrls(title, urlToShorten)
+    getUrls()
+    .then(data => this.setState({urls: data.urls}))
+    .catch(error => console.log('Error fetching', error))
   }
 
   render() {
@@ -20,9 +30,8 @@ export class App extends Component {
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
-          <UrlForm />
+          <UrlForm postData={this.postData} />
         </header>
-
         <UrlContainer urls={this.state.urls}/>
       </main>
     );
