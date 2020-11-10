@@ -10,11 +10,11 @@ describe('Url Form', () => {
 
     render(
       <UrlForm 
-        // addUrl={}
       />
     )
-      screen.debug()
-    expect(screen.getByText('test')).toBeInTheDocument()
-
+    screen.debug()
+    expect(screen.getByPlaceholderText('Title...')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('URL to Shorten...')).toBeInTheDocument()
+    expect(screen.getByText('Shorten Please!')).toBeInTheDocument()
   })
 })
