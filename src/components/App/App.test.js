@@ -32,9 +32,7 @@ describe('App', () => {
     expect(heading).toBeInTheDocument()
     expect(button).toBeInTheDocument()
 
-  })
-
-  describe('App', () => {
+  })  
     it('Should allow user to see urls on the dom', () => {
       render(
         <App />
@@ -43,7 +41,6 @@ describe('App', () => {
       waitFor(() => {
         let title1 = screen.getByText("Awesome photo")
         expect(title1).toBeInTheDocument()
-
       })
     })
-}
+  })
