@@ -16,7 +16,6 @@ export class App extends Component {
   async componentDidMount() {
     try {
       const urls = await getUrls()
-      console.log(urls)
       this.setState(urls)
     } catch (error) {
       this.setState({message: error.message})
@@ -26,6 +25,7 @@ export class App extends Component {
   addUrl = async urlToAdd => {
     try {
       const postedUrl = await postUrl(urlToAdd)
+      console.log(postedUrl)
       const message = "URL successfully added!"
       this.setState({ urls: [...this.state.urls, postedUrl], message})
     } catch (error) {

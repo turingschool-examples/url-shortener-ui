@@ -3,7 +3,7 @@ import {render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import App from './App';
-import { getUrls } from '../../apiCalls';
+import { getUrls, postUrl } from '../../apiCalls';
 jest.mock('../../apiCalls.js')
 
 describe('App', () => {
@@ -38,8 +38,16 @@ describe('App', () => {
           ]
         }
       )
+
+      postUrl.mockResolvedValue({
+        id: 2,
+        long_url: "uuuuuurrrrrrrrllllll.ccccoooooooommmmm",
+        short_url: "url.com",
+        title: "another url"
+      })
+
     })
-  
+    
     it('Should render existing URLs from database', async () => {
       render(<App />)
       
@@ -54,6 +62,24 @@ describe('App', () => {
       expect(url1.title).toBeInTheDocument()
       expect(url1.short_url).toBeInTheDocument()
       expect(url1.long_url).toBeInTheDocument()      
+    })
+
+    it('Should render all App components when user fills and submits form', async () => {
+      const mockAddUrl = jest.fn()
+      render(
+      <App 
+        addUrl={mockAddUrl}
+      />)
+      
+      userEvent.type(screen.getByPlaceholderText('Title...'),'another url')
+      userEvent.type(screen.getByPlaceholderText('URL to Shorten...'),'uuuuuurrrrrrrrllllll.ccccoooooooommmmm')
+      userEvent.click(screen.getByText('Shorten Please!'))
+
+      const title2 = await waitFor(screen.getByText("another url"))
+      // screen.debug()
+      expect(title2).toBeInTheDocument()
+
+      //mock something
     })
 
   })

@@ -18,8 +18,7 @@ describe('Url Form', () => {
 
   it('Should update as data is entered by a user', () => {
     render(
-      <UrlForm 
-      />
+      <UrlForm />
     )
     
     userEvent.type(screen.getByPlaceholderText('Title...'),'bees knees')
