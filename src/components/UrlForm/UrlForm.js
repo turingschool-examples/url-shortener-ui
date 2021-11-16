@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { sendUrl } from '../../apiCalls';
 
 class UrlForm extends Component {
   constructor(props) {
@@ -10,12 +11,18 @@ class UrlForm extends Component {
     };
   }
 
-  handleNameChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  handleNameChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit = e => {
     e.preventDefault();
+    const request = {
+      long_url: this.state.urlToShorten,
+      title: this.state.title
+    }
+    sendUrl(request)
+      .then(response => this.props.addUrl(response))
     this.clearInputs();
   }
 
@@ -27,22 +34,26 @@ class UrlForm extends Component {
     return (
       <form>
         <input
+          id="inputTitle"
           type='text'
           placeholder='Title...'
           name='title'
           value={this.state.title}
-          onChange={e => this.handleNameChange(e)}
+          onChange={event => this.handleNameChange(event)}
         />
 
         <input
+          id="inputUrl"
           type='text'
           placeholder='URL to Shorten...'
-          name='title'
-          value={this.state.title}
-          onChange={e => this.handleNameChange(e)}
+          name='urlToShorten'
+          value={this.state.urlToShorten}
+          onChange={event => this.handleNameChange(event)}
         />
 
-        <button onClick={e => this.handleSubmit(e)}>
+        <button
+          id="submitButton"
+          onClick={e => this.handleSubmit(e)}>
           Shorten Please!
         </button>
       </form>
