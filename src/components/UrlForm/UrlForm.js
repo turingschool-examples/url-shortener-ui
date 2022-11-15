@@ -15,23 +15,16 @@ class UrlForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleSubmit = (event) => {
+  submitUrl = (event) => {
     event.preventDefault()
 
     if (this.state.title === '' && this.state.urlToShorten === '') {
       return this.setState({error: 'Please fill out both inputs!'})
 
     } else {
-      // this.props.addUrl({title: this.state.title, urlToShorten: this.state.urlToShorten})
-
-      const newUrl = {
-        id: Date.now(),
-        ...this.state
-      }
-
-      this.props.addUrl(newUrl)
-      this.clearInputs()
+      this.props.addUrl({title: this.state.title, urlToShorten: this.state.urlToShorten})
     }
+    this.clearInputs()
   }
 
   clearInputs = () => {
@@ -57,7 +50,7 @@ class UrlForm extends Component {
           onChange={event => this.handleChange(event)}
         />
 
-        <button onClick={event => this.handleSubmit(event)}>
+        <button onClick={event => this.submitUrl(event)}>
           Shorten Please!
         </button>
         <p>{this.state.error}</p>
