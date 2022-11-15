@@ -59,6 +59,8 @@ describe('Landing Page', () => {
       .get('input[name=urlToShorten]').type('http://www.hellomonkeyman.com/how-are-you')
       .get('button').click()
 
+    cy.get('.post-message').should('contain', 'Success')
+
     cy.get('section')
       .get('.url').should('have.length', '2')
       .eq(2).should('be.visible')

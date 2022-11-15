@@ -22,12 +22,7 @@ class UrlForm extends Component {
       title: this.state.title,
       long_url: this.state.urlToShorten
     }
-
-    postUrls(information)
-      .then((data) => {
-        console.log({data});
-        // Update state in app to cause a re-render on successful post
-      })
+    this.props.handlePost(information)
 
     this.clearInputs();
   }
