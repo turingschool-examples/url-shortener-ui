@@ -16,7 +16,6 @@ export class App extends Component {
   componentDidMount = () => {
     getUrls()
     .then(data => this.setState({urls: data.urls}))
-    .catch(error => this.setState({error: 'Error loading ideas, please try again!'}))
 }
 
 addUrl = (newUrl) => {
@@ -29,10 +28,8 @@ postUrl = (newUrl) => {
     headers: {
       'Content-Type': 'application/json'},
       body: JSON.stringify({
-        id: newUrl.id,
-        long_url: '',
-        short_url: '',
-        title: ''
+        long_url: newUrl.urlToShorten,
+        title: newUrl.title
       }),
     })
 }
@@ -43,7 +40,7 @@ postUrl = (newUrl) => {
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
-          <UrlForm />
+          <UrlForm addUrl={this.addUrl} />
         </header>
         <UrlContainer urls={this.state.urls}/>
       </main>
