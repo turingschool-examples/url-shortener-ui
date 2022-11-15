@@ -1,9 +1,44 @@
 describe('Landing Page', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/')
+    cy.intercept('GET', 'http://localhost:3001/api/v1/urls', {
+      statusCode: 200,
+      ok: true,
+      fixture: 'urls.json'
+    });
+
+    cy.visit('http://localhost:3000/');
   })
 
-  it('passes', () => {
+  it('Should show the page title', () => {
+    cy.get('h1').should('be.visible').should('contain', 'URL Shortener')
+  })
+
+  it('Should render existing shortened urls', () => {
+    cy.get('section')
+      .get('.url').should('have.length', '1')
+      .first().should('be.visible')
+      .get('h3').should('contain', 'Awesome photo')
+      .get('a').should('contain', 'http://localhost:3001/useshorturl/1')
+  })
+
+  it('Should render a form with the proper inputs', () => {
+    cy.get('form').should('be.visible')
+      .get('input[name=title]').should('exist').should('be.visible')
+      .get('input[name=urlToShorten]').should('exist').should('be.visible')
+      .get('button').should('exist').should('be.visible')
+  })
+
+  it('Should render the users inputs in the forms input fields', () => {
+    cy.get('form')
+      .get('input[name=title]').type('Cool Photo')
+      .get('input[name=urlToShorten]').type('http://www.hellomonkeyman.com/how-are-you')
     
+    cy.get('form')
+      .get('input[name=title]')
+      .should('have.value', 'Cool Photo')
+
+    cy.get('form')
+      .get('input[name=urlToShorten]')
+      .should('have.value', 'http://www.hellomonkeyman.com/how-are-you')
   })
 })
