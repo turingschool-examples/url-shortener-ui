@@ -15,7 +15,8 @@ export class App extends Component {
 
   componentDidMount = () => {
     getUrls()
-    .then(data => this.setState({urls: data.urls}))
+    .then(URLdata => this.setState({urls: URLdata.urls}))
+    .catch(error => this.setState({error: 'Error loading URLs, please try again!'}))
 }
 
 addUrl = (newUrl) => {
@@ -23,15 +24,20 @@ addUrl = (newUrl) => {
 }
 
 postUrl = (newUrl) => {
-  fetch('http://localhost:3001/api/v1/urls', {
+  return fetch('http://localhost:3001/api/v1/urls', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        long_url: newUrl.urlToShorten,
-        title: newUrl.title
-      }),
-    })
+    body: JSON.stringify({
+      long_url: newUrl.urlToShorten,
+      title: newUrl.title 
+    }),
+  })
+  .then(response => {
+    if(response.ok) {
+      return response.json()
+    }
+  })
 }
 
   render() {
