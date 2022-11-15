@@ -5,8 +5,8 @@ import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
 export class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       urls: [],
       error: ''
@@ -15,18 +15,36 @@ export class App extends Component {
 
   componentDidMount = () => {
     getUrls()
-    .then(data => this.setState({urls: data}))
-    .catch(error => this.setState({error: 'Error loading URL data, please try again!'}))
-  }
+    .then(data => this.setState({urls: data.urls}))
+    .catch(error => this.setState({error: 'Error loading ideas, please try again!'}))
+}
+
+addUrl = (newUrl) => {
+  this.setState({urls: [...this.state.urls, newUrl]})
+}
+
+postUrl = (newUrl) => {
+  fetch('http://localhost:3001/api/v1/urls', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        id: newUrl.id,
+        long_url: '',
+        short_url: '',
+        title: ''
+      }),
+    })
+}
 
   render() {
+    console.log(this.state.urls)
     return (
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
           <UrlForm />
         </header>
-
         <UrlContainer urls={this.state.urls}/>
       </main>
     );
