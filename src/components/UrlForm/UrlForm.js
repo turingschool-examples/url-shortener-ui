@@ -6,21 +6,29 @@ class UrlForm extends Component {
     this.props = props;
     this.state = {
       title: '',
-      urlToShorten: ''
+      urlToShorten: '',
+      error: ''
     };
   }
-
-  handleNameChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.clearInputs();
+  submitUrl = (event) => {
+    event.preventDefault()
+
+    if (this.state.title === '' && this.state.urlToShorten === '') {
+      return this.setState({error: 'Please fill out both inputs!'})
+
+    } else {
+      this.props.addUrl({title: this.state.title, urlToShorten: this.state.urlToShorten})
+    }
+    this.clearInputs()
   }
 
   clearInputs = () => {
-    this.setState({title: '', urlToShorten: ''});
+    this.setState({title: '', urlToShorten: '', error: ''});
   }
 
   render() {
@@ -31,20 +39,21 @@ class UrlForm extends Component {
           placeholder='Title...'
           name='title'
           value={this.state.title}
-          onChange={e => this.handleNameChange(e)}
+          onChange={event => this.handleChange(event)}
         />
 
         <input
-          type='text'
+          type='url'
           placeholder='URL to Shorten...'
-          name='title'
-          value={this.state.title}
-          onChange={e => this.handleNameChange(e)}
+          name='urlToShorten'
+          value={this.state.urlToShorten}
+          onChange={event => this.handleChange(event)}
         />
 
-        <button onClick={e => this.handleSubmit(e)}>
+        <button onClick={event => this.submitUrl(event)}>
           Shorten Please!
         </button>
+        <p>{this.state.error}</p>
       </form>
     )
   }

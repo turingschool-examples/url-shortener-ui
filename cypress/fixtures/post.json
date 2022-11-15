@@ -1,0 +1,16 @@
+{
+    "urls": [
+        {
+            "id": "1",
+            "long_url": "https://cdn1.matadornetwork.com/blogs/1/2017/04/33856356872_f49c5f8651_b-1-560x420.jpg",
+            "short_url": "http://localhost:3001/useshorturl/1",
+            "title": "Colorado landscape"
+        }, 
+        {
+            "long_url": "https://cdn1.matadornetwork.com/blogs/1/2017/04/33856356872_f49c5f8651_b-1-560x420.jpg",
+            "title": "Hi",
+            "id": "2",
+            "short_url": "http://localhost:3001/useshorturl/3"
+        }
+    ]
+}
