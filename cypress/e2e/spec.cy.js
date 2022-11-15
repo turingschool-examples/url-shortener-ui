@@ -41,4 +41,28 @@ describe('Landing Page', () => {
       .get('input[name=urlToShorten]')
       .should('have.value', 'http://www.hellomonkeyman.com/how-are-you')
   })
+
+  it('Should render the new shortened url after a successful post', () => {
+    cy.intercept('POST', 'http://localhost:3001/api/v1/urls', {
+      statusCode: 201,
+      ok: true,
+      body: {
+        "id": 2,
+        long_url: 'http://www.hellomonkeyman.com/how-are-you',
+        short_url: 'http://localhost:3001/useshorturl/2',
+        title: 'Cool Photo'
+      }
+    })
+    
+    cy.get('form')
+      .get('input[name=title]').type('Cool Photo')
+      .get('input[name=urlToShorten]').type('http://www.hellomonkeyman.com/how-are-you')
+      .get('button').click()
+
+    cy.get('section')
+      .get('.url').should('have.length', '2')
+      .eq(2).should('be.visible')
+      .get('h3').should('contain', 'Cool Photo')
+      .get('a').should('contain', 'http://localhost:3001/useshorturl/2')
+  })
 })
