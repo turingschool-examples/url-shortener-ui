@@ -20,7 +20,6 @@ class UrlForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const newUrl = {
-      id: Date.now(),
       ...this.state
     }
     this.props.addUrl(newUrl)
