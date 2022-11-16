@@ -1,19 +1,48 @@
 const getUrls = async () => {
-  const response = await fetch('http://localhost:3001/api/v1/urls')
-
-  const data = await response.json()
-  return data
+  try {
+    const response = await fetch('http://localhost:3001/api/v1/urls')
+    if (!response.ok) {
+      console.log(response.status)
+      throw new Error(response.status)
+    }
+    const data = await response.json()
+    console.log(data)
+    return data 
+  }
+  catch (error) {
+    console.log(error.message)
+  }
 }
 
-const postNewUrl = async (newUrl) => {
-  const response = await fetch('http://localhost:3001/api/v1/urls', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(newUrl)
+const postUrls = async (newUrl) => {
+  try {
+    const response = await fetch('http://localhost:3001/api/v1/urls', {
+      method: 'POST',
+      body: JSON.stringify({
+        long_url: newUrl.short_url,
+        title: newUrl.title
+      }),
+      headers: {
+        'Content-Type': 'application/json'   
+    }})
+    if (!response.ok) {
+      console.log(response.status)
+      throw new Error(response.status)
+    }
+    const data = await response.json()
+      return data 
+  }
+  catch (error) {
+    console.log(error.message)
+  }
+}
+
+const deleteUrls = async (url_id) => {
+  const response = await fetch(`http://localhost:3001/api/v1/urls/${url_id}`, {
+    method: 'DELETE'
   })
-
-  const data = await response.json()
-  return data
+  const newData = await response.json()
+  return newData
 }
 
-export { getUrls, postNewUrl }
+export { getUrls, postUrls, deleteUrls }
