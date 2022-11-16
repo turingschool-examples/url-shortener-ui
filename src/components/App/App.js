@@ -1,30 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getUrls, postNewUrl } from '../../apiCalls';
+import { getUrls, postUrls, deleteUrls } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       urls: []
     }
-    console.log(this.state.urls)
-  }
-
-  addUrl = (newUrl) => {
-    postNewUrl(newUrl)
-      .then(response => response.json())
-      .then(data => this.setState({urls: [...this.state.urls, data]}))
-      .catch(error => console.error('Error fetching:', error));
   }
 
   componentDidMount() {
     getUrls()
       .then(data => this.setState({ urls: data.urls }))
-      .catch(error => console.error('Error fetching:', error))
+      .catch(error => this.setState({ error: error }))
   }
+  
+  addUrl = (newUrl) => {
+    postUrls(newUrl)
+    .then(data => this.setState({ urls: [...this.state.urls, data]}))
+  }
+
+  deleteUrl = (url_id) => {
+    deleteUrls(url_id)
+    .then(newUrl => this.setState({urls: newUrl}))
+
+  }
+
   render() {
     return (
       <main className="App">
@@ -32,7 +36,7 @@ class App extends Component {
           <h1>URL Shortener</h1>
           <UrlForm addUrl={this.addUrl}/>
         </header>
-        <UrlContainer urls={this.state.urls}/>
+        <UrlContainer urls={this.state.urls} deleteUrl={this.deleteUrl}/>
       </main>
     );
   }
