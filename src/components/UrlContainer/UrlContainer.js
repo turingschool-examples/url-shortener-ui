@@ -1,22 +1,21 @@
 import React from 'react';
 import './UrlContainer.css';
 
-const UrlContainer = props => {
-  const urlEls = props.urls.map(url => {
+const UrlContainer = (props) => {
+  const urlEls = props.urls.map((url) => {
     return (
-      <div className="url">
+      <div className="url" key={url.id}>
         <h3>{url.title}</h3>
-        <a href={url.short_url} target="blank">{url.short_url}</a>
+        <a href={url.short_url} target="blank">
+          {url.short_url}
+        </a>
         <p>{url.long_url}</p>
+        <button className='delete-btn' onClick={() => props.deleteSelectedUrl(url.id)}>Delete</button>
       </div>
-    )
+    );
   });
 
-  return (
-    <section>
-      { urlEls.length ? urlEls : <p>No urls yet! Find some to shorten!</p> }
-    </section>
-  )
-}
+  return <section>{urlEls.length ? urlEls : <p>No urls yet! Find some to shorten!</p>}</section>;
+};
 
 export default UrlContainer;
