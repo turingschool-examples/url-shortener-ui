@@ -1,4 +1,4 @@
-describe("iteration 5, Error Handling Flows", () => {
+describe("error handling", () => {
     it("Should show error when all urls cannot be retrieved", () => {
       cy.intercept("GET", "http://localhost:3001/api/v1/urls", {
         forceNetworkError: true,
