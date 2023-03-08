@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { updateAPI } from '../../apiCalls';
 
 class UrlForm extends Component {
   constructor(props) {
@@ -6,7 +7,8 @@ class UrlForm extends Component {
     this.props = props;
     this.state = {
       title: '',
-      urlToShorten: ''
+      urlToShorten: '',
+      urls: []
     };
   }
 
@@ -14,19 +16,32 @@ class UrlForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    this.clearInputs();
-  }
-
-  clearInputs = () => {
-    this.setState({title: '', urlToShorten: ''});
+    const newURL = {
+      'long_url': this.state.urlToShorten,
+       'title': this.state.title
+    }
+      updateAPI(newURL)
+        .then(result => {
+          this.setState(prevState => ({
+            title: "",
+            urlToShorten: '',
+            urls: [...prevState.urls, result]
+          }))
+          console.log(result)
+        })
+        .catch(error => {
+          console.log(error)
+          alert("Error")
+    })
   }
 
   render() {
     return (
-      <form>
+      <form className='form-container'>
         <input
+        className='titleInput'
           type='text'
           placeholder='Title...'
           name='title'
@@ -35,10 +50,11 @@ class UrlForm extends Component {
         />
 
         <input
+          className='urlInput'
           type='text'
           placeholder='URL to Shorten...'
-          name='title'
-          value={this.state.title}
+          name='urlToShorten'
+          value={this.state.urlToShorten}
           onChange={e => this.handleNameChange(e)}
         />
 
@@ -49,5 +65,4 @@ class UrlForm extends Component {
     )
   }
 }
-
-export default UrlForm;
+export default UrlForm
