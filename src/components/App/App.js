@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getUrls } from '../../apiCalls';
+import { getUrls, postUrl } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
-export class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      urls: []
+      urls: [],
     }
   }
-
+  
   componentDidMount() {
+    getUrls()
+    .then(data => this.setState({
+      urls: data.urls
+    }))
   }
+  
 
   render() {
     return (
@@ -29,4 +34,5 @@ export class App extends Component {
   }
 }
 
-export default App;
+
+export default App
