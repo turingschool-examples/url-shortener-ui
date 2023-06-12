@@ -1,8 +1,8 @@
 describe('Main View ', () => {
   beforeEach(() => {
-    cy.intercept('GET', '', {
+    cy.intercept('GET', 'http://localhost:3001/api/v1/urls', {
       fixture: "data.json"
-    }).visit('http://localhost:3001/api/v1/urls')
+    }).visit('http://localhost:3000')
   })
 
   it('should display main view', ()=> {
@@ -25,7 +25,7 @@ describe('Main View ', () => {
       .get('input[name="urlToShorten"').type('https://turing.edu/')
 
       .get('input[name="title"').should('have.value', 'Test Title')
-      .get('input[name="urlToShorten"').should('have.value', 'https://turing.edu/ Title')
+      .get('input[name="urlToShorten"').should('have.value', 'https://turing.edu/')
 
     }) 
 

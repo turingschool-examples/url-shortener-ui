@@ -7,13 +7,13 @@
           "title": "Awesome photo"
       },
       {
-          "long_url": "",
+          "long_url": "https://www.google.com/",
           "title": "title",
           "id": 2,
           "short_url": "http://localhost:3001/useshorturl/2"
       },
       {
-          "long_url": "",
+          "long_url": "https://chat.openai.com/",
           "title": "chatGPT",
           "id": 3,
           "short_url": "http://localhost:3001/useshorturl/3"

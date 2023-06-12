@@ -30,6 +30,7 @@ class UrlForm extends Component {
     }
 
     const json = await response.json() 
+    console.log(json)
     this.props.setNewData(json)
     this.clearInputs();
 
