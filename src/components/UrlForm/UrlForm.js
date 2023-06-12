@@ -28,15 +28,12 @@ class UrlForm extends Component {
     if (response.status >= 400 && response.status <= 599) {
       throw new Error('Network response was not OK');
     }
-
-    const json = await response.json() 
-    console.log(json)
+    const json = await response.json()
     this.props.setNewData(json)
     this.clearInputs();
 
-    return response;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 

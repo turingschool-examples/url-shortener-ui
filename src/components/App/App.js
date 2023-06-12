@@ -5,7 +5,7 @@ import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
 export function App()  {
-  const [urls, setUrls] = useState(null)
+  const [urls, setUrls] = useState([])
 
   const getData = async () => {
     try {
@@ -18,14 +18,12 @@ export function App()  {
       const json = await response.json();
       setUrls(json.urls);
       
-      return response;
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   };
   
   const setNewData = (data) => {
-    console.log(urls, data)
     setUrls([...urls, data])
   }
 
@@ -39,8 +37,7 @@ export function App()  {
           <h1>URL Shortener</h1>
           <UrlForm setNewData ={setNewData}/>
         </header>
-
-        {urls && <UrlContainer urls={urls}/>}
+        <UrlContainer urls={urls}/>
     </main>
   );
 }
