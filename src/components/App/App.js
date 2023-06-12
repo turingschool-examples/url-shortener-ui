@@ -1,32 +1,54 @@
-import React, { Component } from 'react';
-import './App.css';
-import { getUrls } from '../../apiCalls';
+import React, { useState, useEffect } from 'react';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
+import { getUrls } from '../../apiCalls';
+import './App.css';
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      urls: []
+function App () {
+  const [urls, setURLS] = useState([])
+
+  const updateURLS = async () => {
+    const data = await getUrls();
+    setURLS(data);
+  }
+
+  const handleShorten = async (title, urlToShorten) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/v1/urls', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          long_url: urlToShorten,
+          title: title,
+        })
+      })
+      if (response.ok) {
+        await updateURLS();
+      } else {
+        console.log('There was an error:', response.statusText);
+      }
+    } catch (error) {
+      console.log('There was an error', error);
     }
   }
 
-  componentDidMount() {
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      await updateURLS();
+    }
+  
+    fetchData();
+  }, [])
 
-  render() {
-    return (
-      <main className="App">
-        <header>
-          <h1>URL Shortener</h1>
-          <UrlForm />
-        </header>
-
-        <UrlContainer urls={this.state.urls}/>
-      </main>
-    );
-  }
+  return(
+    <main className="App">
+      <header>
+        <h1 className="page-title">URL Shortener</h1>
+        <UrlForm handleShorten={handleShorten}/>
+      </header>
+      <UrlContainer urls={urls}/>
+    </main>
+  )
 }
 
 export default App;
