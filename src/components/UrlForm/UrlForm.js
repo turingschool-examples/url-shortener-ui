@@ -10,13 +10,40 @@ class UrlForm extends Component {
     };
   }
 
+  async postUrl () {
+    try {
+      const response = await fetch(`http://localhost:3001/api/v1/urls`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:  JSON.stringify(
+          {
+            long_url: this.state.urlToShorten,
+            title: this.state.title
+          }
+        )
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not OK');
+    }
+    const json = await response.json()
+    this.props.setNewData(json)
+    this.clearInputs();
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
   handleNameChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    this.clearInputs();
+    this.postUrl()
   }
 
   clearInputs = () => {
@@ -37,8 +64,8 @@ class UrlForm extends Component {
         <input
           type='text'
           placeholder='URL to Shorten...'
-          name='title'
-          value={this.state.title}
+          name='urlToShorten'
+          value={this.state.url}
           onChange={e => this.handleNameChange(e)}
         />
 
