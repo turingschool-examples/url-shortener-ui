@@ -3,7 +3,7 @@ import './UrlContainer.css';
 
 const UrlContainer = ({urls}) => {
   console.log(urls)
-  const urlEls = urls.urls.map(url => {
+  const urlEls = urls.map(url => {
     return (
       <div className="url">
         <h3>{url.title}</h3>

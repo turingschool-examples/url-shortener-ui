@@ -16,8 +16,7 @@ export function App()  {
       }
       
       const json = await response.json();
-      console.log(json);
-      setUrls(json);
+      setUrls(json.urls);
       
       return response;
     } catch (error) {
@@ -25,6 +24,10 @@ export function App()  {
     }
   };
   
+  const setNewData = (data) => {
+    console.log(urls, data)
+    setUrls([...urls, data])
+  }
 
   useEffect(() => {
     getData()
@@ -34,7 +37,7 @@ export function App()  {
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
-          <UrlForm />
+          <UrlForm setNewData ={setNewData}/>
         </header>
 
         {urls && <UrlContainer urls={urls}/>}
