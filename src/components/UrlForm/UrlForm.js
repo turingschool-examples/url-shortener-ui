@@ -31,6 +31,7 @@ class UrlForm extends Component {
           type='text'
           placeholder='Title...'
           name='title'
+          
           value={this.state.title}
           onChange={e => this.handleNameChange(e)}
         />
