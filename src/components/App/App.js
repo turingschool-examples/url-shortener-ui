@@ -5,10 +5,29 @@ import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
 export function App()  {
-  const [urls, setUrls] = useState([])
+  const [urls, setUrls] = useState(null)
 
-  useEffect( () => {
+  const getData = async () => {
+    try {
+      const response = await getUrls();
+      
+      if (response.status >= 400 && response.status <= 599) {
+        throw new Error();
+      }
+      
+      const json = await response.json();
+      console.log(json);
+      setUrls(json);
+      
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+  
 
+  useEffect(() => {
+    getData()
   }, []) 
 
   return (
@@ -18,7 +37,7 @@ export function App()  {
           <UrlForm />
         </header>
 
-        <UrlContainer urls={urls}/>
+        {urls && <UrlContainer urls={urls}/>}
     </main>
   );
 }
