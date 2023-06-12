@@ -8,19 +8,18 @@ const App = () => {
   const [urls, setUrls] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const getUrls = useCallback(async() => {
+  const fetchUrls = useCallback(async() => {
     try {
       const response = await getUrls();
       setUrls(response.urls);
     } catch (error) {
-      console.log(error);
       setErrorMsg(error.message);
     }
   }, []);
 
   useEffect(() => {
-    getUrls();
-  }, [getUrls]);
+    fetchUrls();
+  }, [fetchUrls]);
 
   return (
     <main className="App">
