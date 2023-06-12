@@ -8,14 +8,20 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      urls: []
+      urls: [],
+      err: ''
     }
   }
 
   addUrl = (formData) => {
     postUrl(formData)
     .then(data => {
+      console.log('data return', data)
       this.setState({ urls: [...this.state.urls, data] })
+    })
+    .catch(err => {
+      console.log('catch block',err)
+      this.setState({ err: err.message })
     })
   }
 
@@ -23,6 +29,10 @@ export class App extends Component {
     getUrls()
     .then(data => {
       this.setState({ urls: [...data.urls] })
+    })
+    .catch(err => {
+      console.log('catch block',err)
+      this.setState({ err: err.message })
     })
   }
 
@@ -34,7 +44,7 @@ export class App extends Component {
           <UrlForm postData={this.addUrl}/>
         </header>
 
-        <UrlContainer urls={this.state.urls}/>
+        <UrlContainer err={this.state.err} urls={this.state.urls}/>
       </main>
     );
   }

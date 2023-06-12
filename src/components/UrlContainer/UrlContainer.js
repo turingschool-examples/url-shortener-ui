@@ -12,11 +12,20 @@ const UrlContainer = props => {
     )
   });
 
-  return (
-    <section>
-      { urlEls.length ? urlEls : <p>No urls yet! Find some to shorten!</p> }
-    </section>
-  )
+  if (props.err) {
+    return (
+      <section>
+        <h2 className="error-message">{props.err}</h2>
+      </section>
+    )
+  } else {
+    console.log(props)
+    return (
+      <section>
+        { urlEls.length ? urlEls : <p>No urls yet! Find some to shorten!</p> }
+      </section>
+    )
+  }
 }
 
 export default UrlContainer;
