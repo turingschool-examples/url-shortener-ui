@@ -11,7 +11,7 @@ export function App()  {
     try {
       const response = await getUrls();
       
-      if (response.status >= 400 && response.status <= 599) {
+      if (!response.ok) {
         throw new Error();
       }
       

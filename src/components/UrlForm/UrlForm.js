@@ -25,7 +25,7 @@ class UrlForm extends Component {
         )
     });
 
-    if (response.status >= 400 && response.status <= 599) {
+    if (!response.ok) {
       throw new Error('Network response was not OK');
     }
     const json = await response.json()
