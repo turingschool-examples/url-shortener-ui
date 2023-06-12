@@ -1,32 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect, useCallback } from 'react';
 import './App.css';
 import { getUrls } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      urls: []
+const App = () => {
+  const [urls, setUrls] = useState([]);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const getUrls = useCallback(async() => {
+    try {
+      const response = await getUrls();
+      setUrls(response.urls);
+    } catch (error) {
+      console.log(error);
+      setErrorMsg(error.message);
     }
-  }
+  }, []);
 
-  componentDidMount() {
-  }
+  useEffect(() => {
+    getUrls();
+  }, [getUrls]);
 
-  render() {
-    return (
-      <main className="App">
-        <header>
-          <h1>URL Shortener</h1>
-          <UrlForm />
-        </header>
+  return (
+    <main className="App">
+      <header>
+        <h1>URL Shortener</h1>
+        <UrlForm />
+      </header>
 
-        <UrlContainer urls={this.state.urls}/>
-      </main>
-    );
-  }
+      <UrlContainer urls={urls}/>
+    </main>
+  );
 }
 
 export default App;
