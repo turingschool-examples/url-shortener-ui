@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './UrlForm.css';
 
 class UrlForm extends Component {
   constructor(props) {
@@ -6,18 +7,23 @@ class UrlForm extends Component {
     this.props = props;
     this.state = {
       title: '',
-      long_url: ''
+      long_url: '',
+      error: ''
     };
   }
 
   handleNameChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value, error: '' });
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.postData({...this.state, id: Date.now()})
-    this.clearInputs();
+    if (!this.state.title || !this.state.long_url) {
+      this.setState({ error: 'please fill out all inputs' })
+    } else {
+      this.props.postData({...this.state, id: Date.now()})
+      this.clearInputs();
+    }
   }
 
   clearInputs = () => {
@@ -25,6 +31,7 @@ class UrlForm extends Component {
   }
 
   render() {
+
     return (
       <form>
         <input
@@ -48,6 +55,7 @@ class UrlForm extends Component {
         <button className='submit-btn' onClick={e => this.handleSubmit(e)}>
           Shorten Please!
         </button>
+        {this.state.error && <h4>{this.state.error}</h4>}
       </form>
     )
   }
