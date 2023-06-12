@@ -14,13 +14,14 @@ export class App extends Component {
 
   addUrl = (formData) => {
     postUrl(formData)
-    .then(data => console.log(data, 'post data'))
+    .then(data => {
+      this.setState({ urls: [...this.state.urls, data] })
+    })
   }
 
   componentDidMount() {
     getUrls()
     .then(data => {
-      console.log(data)
       this.setState({ urls: [...data.urls] })
     })
   }
