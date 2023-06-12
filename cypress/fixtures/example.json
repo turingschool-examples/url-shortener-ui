@@ -1,5 +1,20 @@
 {
-  "name": "Using fixtures to represent data",
-  "email": "hello@cypress.io",
-  "body": "Fixtures are a great way to mock data for responses to routes"
+"urls": [{
+  "id": 1,
+  "long_url": "https://images.unsplash.com/photo-1669223206469-0e74c34c275d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
+  "short_url": "http://localhost:3001/useshorturl/1",
+  "title": "The coolest photo"
+},
+{
+  "id": 2,
+  "long_url": "https://images.unsplash.com/photo-1685760248065-2ef5b4fc7415?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+  "short_url": "http://localhost:3001/useshorturl/2",
+  "title": "Nothing to see but awesomeness"
+},
+{
+  "id": 3,
+  "long_url": "https://images.unsplash.com/photo-1517331156700-3c241d2b4d83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhdHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+  "short_url": "http://localhost:3001/useshorturl/3",
+  "title": "cats cats cats"
+}]
 }
