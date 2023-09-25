@@ -6,10 +6,12 @@ import UrlForm from '../UrlForm/UrlForm';
 
 function App () {
   const [urls, setUrls] = useState([]);
-
+  console.log('urls',urls)
   useEffect(() => {
-
-  })
+    getUrls()
+    .then(data => setUrls(data.urls))
+    .catch(err => console.log(err))
+  }, [])
 
   return (
     <main className="App">
@@ -18,7 +20,8 @@ function App () {
         <UrlForm />
       </header>
 
-      <UrlContainer urls={"<<<Urls should go here>>>"}/>
+      <UrlContainer urls={urls}/>
+      {/* <UrlContainer urls={"<<<Urls should go here>>>"}/> */}
     </main>
   );
 }
