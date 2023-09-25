@@ -1,17 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {postUrl} from '../../apiCalls'
 
-function UrlForm() {
-  const [title, setTitle] = useState('');
-  const [urlToShorten, setUrlToShorten] = useState('');
+function UrlForm({addUrl}) {
+  const [formData, setFormData] = useState({
+    long_url: '',
+    title: '',
+  });
 
-  const handleSubmit = e => {
+
+  const [alert, setAlert] = useState("")
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  }; 
+  
+  const submitUrl = (e) => {
     e.preventDefault();
-    clearInputs();
-  }
-
-  const clearInputs = () => {
-    setTitle('');
-    setUrlToShorten('');
+    // if(isFormComplete()) {
+      console.log('form data')
+      postUrl(formData)
+      .then(postResult => {
+        addUrl(postResult);
+        setFormData({
+        long_url: "",
+        title: ""})
+      })
+      // .catch(err => console.error(err)
+      
+    // } else {
+    //   setAlert("Form is incomplete. Please fill in all fields.")
+    // }
   }
 
   return (
@@ -20,19 +39,21 @@ function UrlForm() {
         type='text'
         placeholder='Title...'
         name='title'
-        value={title}
-        // onChange={e => }
+        value={formData.title}
+        onChange={handleChange}
+        className='titleInput'
       />
 
       <input
         type='text'
         placeholder='URL to Shorten...'
-        name='title'
-        value={title}
-        // onChange={e => }
+        name='long_url'
+        value={formData.long_url}
+        onChange={handleChange}
+        className='urlInput'
       />
 
-      <button onClick={e => handleSubmit(e)}>
+      <button onClick={submitUrl}>
         Shorten Please!
       </button>
     </form>
