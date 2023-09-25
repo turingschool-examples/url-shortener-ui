@@ -10,12 +10,7 @@ function UrlForm({addUrl}) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const inputUrl = {
-      id: Date.now(),
-      title: formData.title,
-      long_url: formData.long_url
-    }
-    addUrl(inputUrl)
+    addUrl(formData)
     clearInputs();
   }
 
