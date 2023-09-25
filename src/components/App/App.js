@@ -20,15 +20,6 @@ function App () {
     .catch(err => setError(`${err.message}`))
   }
 
-  const removeUrl = id => {
-    deleteUrl(id)
-    .then(() => {
-      const updatedUrls = urls.filter(url => url.id !== id)
-      setUrls(updatedUrls)
-    })
-    .catch(err => setError(`${err.message}`))
-  }
-
   return (
     <main className="App">
       <header>
@@ -36,7 +27,7 @@ function App () {
         <UrlForm addUrl={addUrl}/>
       </header>
       {error && <p>{error}</p>}
-      {!error &&  <UrlContainer urls={urls} removeUrl={removeUrl}/>}
+      {!error &&  <UrlContainer urls={urls} />}
     </main>
   );
 }
