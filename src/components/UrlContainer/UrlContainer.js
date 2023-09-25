@@ -1,5 +1,6 @@
 import React from 'react';
 import './UrlContainer.css';
+import scissors from '../../scissors.jpg'
 
 const UrlContainer = ({urls, deleteUrl}) => {
   console.log("urls", urls)
@@ -7,12 +8,12 @@ const UrlContainer = ({urls, deleteUrl}) => {
 
   const urlEls = urls.urls.map(url => {
     return (
-      <div className="url">
+      <div className="url" key={url.id}>
         <h3>{url.title}</h3>
         <a href={url.short_url} target="blank">{url.short_url}</a>
         <p>{url.long_url}</p>
-        <img src={url.long_url} id={url.id} key={url.id}></img>
-        <button OnClick= {()=> deleteUrl(url.id)}>delete</button>
+        <img src={scissors} id={url.id} key={url.id}></img>
+        <button onClick= {()=> deleteUrl(url.id)}>delete</button>
       </div>
     )
   });
