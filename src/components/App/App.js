@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { getUrls } from '../../apiCalls';
+import { getUrls, postUrls } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
 function App () {
   const [urls, setUrls] = useState([]);
-  console.log('urls',urls)
+  
   useEffect(() => {
     getUrls()
     .then(data => setUrls(data.urls))
     .catch(err => console.log(err))
   }, [])
+
+  const addUrl = (inputURL) => {
+    postUrls(inputURL)
+    .then(data => {
+      setUrls([...urls, data])
+    })
+    .catch(err => console.log(err))
+  }
 
   return (
     <main className="App">
