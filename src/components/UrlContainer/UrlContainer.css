@@ -5,3 +5,7 @@
   padding: 5px;
   background-color: #FFF;
 }
+.url>img{
+  height: 20vh; 
+  width: auto;
+}

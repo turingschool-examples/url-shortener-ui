@@ -9,3 +9,7 @@ export const getUrls = () => {
       })
       .then( response =>  response.json()) 
 }
+
+export const postURl = () => {
+  return
+}
