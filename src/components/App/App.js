@@ -15,10 +15,7 @@ function App () {
 
   const addUrl = (inputURL) => {
     postUrls(inputURL)
-    .then(data => {
-      console.log('data', data)
-      setUrls([...urls, data])
-    })
+    .then(data => setUrls([...urls, data]))
     .catch(err => console.log(err))
   }
 
