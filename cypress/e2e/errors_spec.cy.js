@@ -12,7 +12,7 @@ describe('errors', () => {
     })
     cy.get('body').contains('p', 'Request failed - 500')
   })
-  it('should show message for user to fill out all input fields', ()=>{
+  it('should show message for user to fill out all input fields', () =>{
     cy.intercept('POST', 'http://localhost:3001/api/v1/urls', {
       statusCode: 200,
       body: {
