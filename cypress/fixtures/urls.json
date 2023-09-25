@@ -3,7 +3,7 @@
     {
       "id": 1,
       "long_url": "https://images.unsplash.com/photo-1531898418865-48…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80', short_url: 'http://localhost:3001/useshorturl/1",
-      "   short_url": "http://localhost:3001/useshorturl/1",
+      "short_url": "http://localhost:3001/useshorturl/1",
       "title": "Awesome photo"
     },
     {

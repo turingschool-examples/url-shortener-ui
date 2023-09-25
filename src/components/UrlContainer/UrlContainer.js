@@ -8,7 +8,7 @@ const UrlContainer = ({urls, deleteUrl}) => {
 
   const urlEls = urls.urls.map(url => {
     return (
-      <div className="url" key={url.id}>
+      <div className={`url num${url.id}`} key={url.id}>
         <h3>{url.title}</h3>
         <a href={url.short_url} target="blank">{url.short_url}</a>
         {/* <p>{url.long_url}</p> */}

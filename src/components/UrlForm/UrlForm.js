@@ -41,6 +41,7 @@ function UrlForm({addUrl}) {
         name='title'
         value={formData.title}
         onChange={handleChange}
+        className='titleInput'
       />
 
       <input
@@ -49,6 +50,7 @@ function UrlForm({addUrl}) {
         name='long_url'
         value={formData.long_url}
         onChange={handleChange}
+        className='urlInput'
       />
 
       <button onClick={submitUrl}>
