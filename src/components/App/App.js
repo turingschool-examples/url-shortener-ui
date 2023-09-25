@@ -16,6 +16,7 @@ function App () {
   const addUrl = (inputURL) => {
     postUrls(inputURL)
     .then(data => {
+      console.log('data', data)
       setUrls([...urls, data])
     })
     .catch(err => console.log(err))
@@ -25,7 +26,7 @@ function App () {
     <main className="App">
       <header>
         <h1>URL Shortener</h1>
-        <UrlForm />
+        <UrlForm addUrl={addUrl}/>
       </header>
 
       <UrlContainer urls={urls}/>
