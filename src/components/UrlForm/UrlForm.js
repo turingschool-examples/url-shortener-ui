@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 
 function UrlForm({addUrl}) {
-  // const [title, setTitle] = useState('');
-  // const [urlToShorten, setUrlToShorten] = useState('');
   const [formData, setFormData] = useState({
     title:'',
     long_url: ''
   })
+  const [alert, setAlert] = useState('')
+
+  const isFormIncomplete = () => {
+    return Object.values(formData).some(input => input === '')
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
-    addUrl(formData)
-    clearInputs();
+
+    if(!isFormIncomplete()) {
+      addUrl(formData)
+      clearInputs();
+    } else {
+      setAlert('Please fill out all input fields')
+    }
   }
 
   const handleChange = e => {
+    setAlert('')
     const {name, value} = e.target
     setFormData({...formData, [name]: value})
   }
-  // const clearInputs = () => {
-  //   setTitle('');
-  //   setUrlToShorten('');
-  // }
 
   const clearInputs = () => {
     setFormData({title:'', long_url:''});
@@ -35,7 +40,6 @@ function UrlForm({addUrl}) {
         name='title'
         value={formData.title}
         onChange={handleChange}
-        // onChange={e => }
       />
 
       <input
@@ -44,12 +48,11 @@ function UrlForm({addUrl}) {
         name='long_url'
         value={formData.long_url}
         onChange={handleChange}
-        // onChange={e => }
       />
-
       <button onClick={e => handleSubmit(e)}>
         Shorten Please!
       </button>
+      <p>{alert}</p>
     </form>
   )
 }
