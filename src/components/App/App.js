@@ -17,8 +17,10 @@ function App () {
   )
   }
   function addUrl(newUrl){
-    setUrls(...urls, newUrl)
+    setUrls([ ...urls, newUrl ])
+    .then (getUrlData())
   }
+  
 
   function deleteUrl(id) {
     console.log("id", id)
@@ -31,6 +33,9 @@ function App () {
    console.log("urls", urls)
   }, [])
 
+  useEffect(() => {
+    getUrlData();
+  }, [urls]);
   return (
     <main className="App">
       <header>
