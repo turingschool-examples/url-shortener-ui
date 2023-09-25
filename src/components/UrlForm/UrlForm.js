@@ -1,42 +1,46 @@
 import React, { useState } from 'react';
 
-function UrlForm() {
+function UrlForm({ addUrl }) {
   const [title, setTitle] = useState('');
   const [urlToShorten, setUrlToShorten] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    clearInputs();
-  }
+
+    if (document.querySelector('form').reportValidity()) {
+      clearInputs();
+      addUrl({ long_url: urlToShorten, title: title });
+    }
+  };
 
   const clearInputs = () => {
     setTitle('');
     setUrlToShorten('');
-  }
+  };
 
   return (
-    <form>
+    <form className='form'>
       <input
         type='text'
         placeholder='Title...'
         name='title'
         value={title}
-        // onChange={e => }
+        onChange={e => setTitle(e.target.value)}
+        required
       />
 
       <input
         type='text'
         placeholder='URL to Shorten...'
-        name='title'
-        value={title}
-        // onChange={e => }
+        name='url'
+        value={urlToShorten}
+        onChange={e => setUrlToShorten(e.target.value)}
+        required
       />
 
-      <button onClick={e => handleSubmit(e)}>
-        Shorten Please!
-      </button>
+      <button onClick={e => handleSubmit(e)}>Shorten Please!</button>
     </form>
-  )
+  );
 }
 
 export default UrlForm;
