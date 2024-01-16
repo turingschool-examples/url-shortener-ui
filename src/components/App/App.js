@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { getUrls } from "../../apiCalls";
+import { getUrls, postUrl } from "../../apiCalls";
 import UrlContainer from "../UrlContainer/UrlContainer";
 import UrlForm from "../UrlForm/UrlForm";
 
@@ -30,7 +30,7 @@ function App() {
     <main className="App">
       <header>
         <h1>URL Shortener</h1>
-        <UrlForm addUrl={addUrl}/>
+        <UrlForm addUrl={addUrl} postUrl={postUrl} />
       </header>
 
       <UrlContainer urls={urls} />
