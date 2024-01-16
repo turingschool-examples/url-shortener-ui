@@ -20,8 +20,6 @@ function App() {
 
   const addUrl = (newUrl) => {
     setUrls([...urls, newUrl]);
-    postUrl(newUrl)
-    fetchData()
   };
 
   
