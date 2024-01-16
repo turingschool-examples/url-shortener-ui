@@ -1,5 +1,6 @@
-import React, { useState, useEffect} from 'react';
-function UrlForm({addUrl, postUrl}) {
+import React, { useState} from 'react';
+import { postUrl } from '../../apiCalls';
+function UrlForm({addUrl}) {
   const [title, setTitle] = useState('');
   const [urlToShorten, setUrlToShorten] = useState('');
 
@@ -9,8 +10,8 @@ function UrlForm({addUrl, postUrl}) {
        long_url: urlToShorten,
        title: title,
     }
-    addUrl(newUrl)
     postUrl(newUrl)
+    addUrl(newUrl)
     clearInputs();
   }
 
