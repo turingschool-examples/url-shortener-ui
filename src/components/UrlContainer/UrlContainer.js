@@ -4,7 +4,7 @@ import './UrlContainer.css';
 const UrlContainer = ({urls}) => {
   const urlEls = urls.map(url => {
     return (
-      <div className="url" key={Date.now()}>
+      <div className="url" key={url.id}>
         <h3>{url.title}</h3>
         <a href={url.short_url} target="blank">{url.short_url}</a>
         <p>{url.long_url}</p>
@@ -14,8 +14,8 @@ const UrlContainer = ({urls}) => {
 
   return (
     <section>
-       {urlEls}
-      { urlEls.length ? urlEls : <p>No urls yet! Find some to shorten!</p> }
+      {urlEls}
+      {/* { urlEls.length ? urlEls : <p>No urls yet! Find some to shorten!</p> } */}
     </section>
   )
 }
