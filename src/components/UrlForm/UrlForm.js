@@ -20,7 +20,7 @@ function UrlForm() {
         type='text'
         placeholder='Title...'
         name='title'
-        value={title}
+        // value={title}
         // onChange={e => }
       />
 
@@ -28,7 +28,7 @@ function UrlForm() {
         type='text'
         placeholder='URL to Shorten...'
         name='title'
-        value={title}
+        // value={title}
         // onChange={e => }
       />
 
