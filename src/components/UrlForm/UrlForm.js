@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-function UrlForm({addUrl}) {
-  const [title, setTitle] = useState('');
-  const [urlToShorten, setUrlToShorten] = useState('');
+function UrlForm({addUrl, title, urlToShorten, setUrlToShorten, setTitle}) {
+  
 
   const handleSubmit = e => {
     e.preventDefault();
