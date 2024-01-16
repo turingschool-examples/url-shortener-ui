@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-function UrlForm({ addUrl, postUrl }) {
-  const [title, setTitle] = useState("");
-  const [urlToShorten, setUrlToShorten] = useState("");
+import React, { useState} from 'react';
+import { postUrl } from '../../apiCalls';
+function UrlForm({addUrl}) {
+  const [title, setTitle] = useState('');
+  const [urlToShorten, setUrlToShorten] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
