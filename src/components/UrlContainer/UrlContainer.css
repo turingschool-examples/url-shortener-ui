@@ -4,4 +4,10 @@
   margin: 10px;
   padding: 5px;
   background-color: #FFF;
+  width: 20vw;
+  height: auto;
+}
+.url>img{
+  height: 20vh; 
+  width: 20vw;
 }

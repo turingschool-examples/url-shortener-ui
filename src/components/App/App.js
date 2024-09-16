@@ -6,19 +6,45 @@ import UrlForm from '../UrlForm/UrlForm';
 
 function App () {
   const [urls, setUrls] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  function getUrlData(){
+    getUrls()
+    .then((data) => {
+      setUrls(data)
+      setIsLoaded(true)
+    }
+  )
+  }
+  function addUrl(newUrl){
+    setUrls([ ...urls, newUrl ])
+    .then (getUrlData())
+  }
+  
+
+  function deleteUrl(id) {
+    console.log("id", id)
+    const filteredUrls = urls.filter(url => url.id !== id);
+    setUrls(filteredUrls)
+  }
 
   useEffect(() => {
+   getUrlData()
+   console.log("urls", urls)
+  }, [])
 
-  })
-
+  useEffect(() => {
+    getUrlData();
+  }, [urls]);
   return (
     <main className="App">
       <header>
         <h1>URL Shortener</h1>
-        <UrlForm />
+        <UrlForm addUrl={addUrl}/>
       </header>
-
-      <UrlContainer urls={"<<<Urls should go here>>>"}/>
+      {isLoaded ? 
+      <UrlContainer urls={urls} deleteUrl={deleteUrl}/> : <p>Loading . . .</p>
+}
     </main>
   );
 }
